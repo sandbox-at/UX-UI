@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.container {
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+}
+
+.card {
+  display: inline-block;
+  width: 300px;
+  margin-right: 20px;
+  background-color: #f1f1f1;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+}
+
+.card-container {
+  margin-bottom: 20px;
+}
+
+.button-container {
+  margin-top: 10px;
+}
+
+.button {
+  padding: 10px;
+  background-color: #f1f1f1;
+  border: none;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="card-container">
+    <div class="card">
+      <img src="image1.jpg" alt="Image 1">
+      <h2>Card 1</h2>
+      <p>This is the content of card 1.</p>
+    </div>
+
+    <div class="card">
+      <img src="image2.jpg" alt="Image 2">
+      <h2>Card 2</h2>
+      <p>This is the content of card 2.</p>
+    </div>
+
+    <div class="card">
+      <img src="image3.jpg" alt="Image 3">
+      <h2>Card 3</h2>
+      <p>This is the content of card 3.</p>
+    </div>
+
+    <div class="card">
+      <img src="image4.jpg" alt="Image 4">
+      <h2>Card 4</h2>
+      <p>This is the content of card 4.</p>
+    </div>
+
+    <div class="card">
+      <img src="image5.jpg" alt="Image 5">
+      <h2>Card 5</h2>
+      <p>This is the content of card 5.</p>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button class="button" id="prevButton" disabled>Previous</button>
+    <button class="button" id="nextButton">Next</button>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const container = document.querySelector('.container');
+  const cardContainer = document.querySelector('.card-container');
+  const prevButton = document.getElementById('prevButton');
+  const nextButton = document.getElementById('nextButton');
+  const scrollStep = 50; // Adjust this value to change scroll distance
+
+  nextButton.addEventListener('click', function() {
+    container.scrollBy({
+      top: 0,
+      left: scrollStep,
+      behavior: 'smooth'
+    });
+  });
+
+  prevButton.addEventListener('click', function() {
+    container.scrollBy({
+      top: 0,
+      left: -scrollStep,
+      behavior: 'smooth'
+    });
+  });
+
+  container.addEventListener('scroll', function() {
+    prevButton.disabled = container.scrollLeft === 0;
+    nextButton.disabled = container.scrollLeft >= (cardContainer.scrollWidth - cardContainer.clientWidth);
+  });
+});
+</script>
+</body>
+</html>
